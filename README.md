@@ -1,4 +1,4 @@
-# mass_mail
+# mass_mailer
 
 Need to send a lot of mails and don't want to write some small tool?
 Well, here is my small variant. Obtains all the functions i needed.
