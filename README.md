@@ -5,6 +5,8 @@ Well, here is my small variant. Obtains all the functions i needed.
 
 Sorry, it's not well coded, but it's working.
 
+using [marrows mailer](https://github.com/marrow/mailer)
+
 ## How to run
 
 - edit the infos in the mail!
