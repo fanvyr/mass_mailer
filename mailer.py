@@ -3,7 +3,7 @@ from marrow.mailer import Mailer, Message
 mailer = Mailer(dict(
     transport = dict (
         use = 'smtp',
-        host = 'smtp.1und1.de',
+        host = 'smtp.xx.com',
         username = "username",
         password = "password"
     )
@@ -19,20 +19,24 @@ def sendMail(mail):
         message = Message(author="mail-from@domain.com", to=mail)
 
 
-        message.subject = "Betreff"
-        message.plain = "Bitte aktivieren Sie HTML um diese Mail lesen zu können oder sehen Sie sie alternativ in ihrem Webbrowser an."
-        message.reply = "reply-to@mailadresse.de"
+        # mail subject, obviously
+        message.subject = "Subject"
+        
+        # plain text variant:
+        message.plain = "Please view this mail with html enabled."
+        
+        # when pressing "reply", send mail to:
+        message.reply = "reply-to@mailadresse.com"
+        
+        # HTML variant:
         message.rich = """ 
         
-        <h1>Überschrift</h1>
+        <h1>Header</h1>
+        <p>some text</p>
 
         """
 
-        message.attach(name='Einladung_QuantiSana-Heilpraxis_Zahnmedizin.pdf')
-        message.attach(name='Kontakt.vcf')
-        message.attach(name='Termin.ics')
-        #message.embed(name='image001.jpg')
-
+        message.attach(name='path-to-attachment.pdf')
 
         mailer.send(message)
         print('successfull sent mail to ' + mail)
@@ -44,6 +48,8 @@ def sendMail(mail):
 
 
 tfile = open('kontakte.csv', 'r')
+
+# format this matching to your file 
 lines = tfile.readline()
 mails = lines.split()
 
@@ -51,12 +57,16 @@ mailer.start()
 
 
 for mail in mails:
+    
+    #csv? remove seperator:
     mail = mail.replace("'", "")
     mail = mail.replace(";", "")
 
+    # call method, if true: mail successfully sent
     res = sendMail(mail)
-
-    if res == True:
+    
+    # counter
+    if res:
         positiv += 1
     else: 
         negativ += 1
