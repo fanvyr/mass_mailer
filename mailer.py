@@ -47,7 +47,7 @@ def sendMail(mail):
         return False
 
 
-tfile = open('kontakte.csv', 'r')
+tfile = open('contacts.csv', 'r')
 
 # format this matching to your file 
 lines = tfile.readline()
